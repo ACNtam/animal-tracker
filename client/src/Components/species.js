@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
-import { useReducer } from "react";
-
+import { useState, useEffect } from "react";
 const Species = () => {
   const [species, setSpecies] = useState([]);
-
-  //get individuals data table
+  //get species data table from backend
   const getSpecies = async () => {
-    const response = await fetch(`http://localhost:8081/species`);
+    const response = await fetch(`http://localhost:8080/species`);
     const data = await response.json();
     console.log(data);
     setSpecies(data);
@@ -14,7 +11,6 @@ const Species = () => {
   useEffect(() => {
     getSpecies();
   }, []);
-
   //initialistate of the form will be empty
   const initialState = {
     id: "",
@@ -22,25 +18,12 @@ const Species = () => {
     species_id: "",
     seen_on: "",
   };
-
+  //will show on browser
   return (
     <div>
-      <h1>Hello World 3</h1>
+      <h1>Hello World</h1>
     </div>
   );
 };
 
 export default Species;
-
-
-
-
-
-
-
-
-
-
-
-
-

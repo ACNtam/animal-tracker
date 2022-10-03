@@ -1,0 +1,27 @@
+//server connected to db
+import db from "../db/db-connection.js";
+import express from "express";
+
+//telling express for which handlers to use
+const router = express.Router();
+/* GET users listing. */
+//9-20 considered request handler
+//within it we are using a try/catch block
+router.get("/", async function (req, res) {
+  try {
+    const sightings = await db.any("SELECT * FROM sightings ORDER BY id", [
+      true,
+    ]);
+    //send the data back to the server based on the sightings that came from the db
+    res.send(sightings);
+    //catch unexpected errors
+    //console log err
+    //and send response with a 400 error to client
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ e });
+  }
+});
+
+//this allows for this router to be used in other files
+export default router;
